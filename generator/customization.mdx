@@ -1,0 +1,313 @@
+---
+title: "Customization"
+description: "Edit the data structures in generator.py to personalize every section of your portfolio."
+---
+
+All portfolio content lives in `generator.py` as Python dictionaries and lists near the top of the file. Edit those data structures, re-run the generator, and `index.html` is rebuilt with your changes.
+
+```bash
+python generator.py
+```
+
+## PERSONAL\_INFO
+
+Controls the sidebar header, profile image, social links, and contact detail rows.
+
+```python
+PERSONAL_INFO = {
+    "name": "Julian Reder",
+    "title": "Computer Engineering Student @ NCSU",
+    "profile_image": "pfp.webp",
+    "social_links": {
+        "github": "https://github.com/quantumbagel",
+        "linkedin": "https://www.linkedin.com/in/julian-reder-nc/",
+        "discord": "https://discordapp.com/users/897146430664355850",
+        "resume": "https://docs.google.com/document/d/..."
+    },
+    "contact_details": [
+        {"icon": "calendar-outline", "label": "Birthday", "value": "March 13"},
+        {"icon": "location-outline", "label": "Location", "value": "North Carolina, USA"},
+        {"icon": "logo-github",       "label": "GitHub",   "value": "@quantumbagel"}
+    ]
+}
+```
+
+### Top-level fields
+
+<ParamField path="name" type="string" required>
+  Your full name. Displayed prominently in the sidebar header.
+</ParamField>
+
+<ParamField path="title" type="string" required>
+  A short tagline — e.g., your role and organization. Appears beneath your name.
+</ParamField>
+
+<ParamField path="profile_image" type="string" required>
+  File name of your profile picture relative to the repo root. Must be `pfp.webp` unless you also update the reference in the template.
+</ParamField>
+
+### social\_links fields
+
+<ParamField path="social_links.github" type="string">
+  Full URL to your GitHub profile.
+</ParamField>
+
+<ParamField path="social_links.linkedin" type="string">
+  Full URL to your LinkedIn profile.
+</ParamField>
+
+<ParamField path="social_links.discord" type="string">
+  Full URL to your Discord user profile (`https://discordapp.com/users/<id>`).
+</ParamField>
+
+<ParamField path="social_links.resume" type="string">
+  URL to your resume — Google Docs, a PDF host, or any public link.
+</ParamField>
+
+### contact\_details items
+
+Each item in `contact_details` renders as one row in the sidebar info table.
+
+<ParamField path="contact_details[].icon" type="string" required>
+  An [Ionicons](https://ionic.io/ionicons) icon name (e.g., `"location-outline"`, `"logo-github"`). Use outline variants for a consistent look.
+</ParamField>
+
+<ParamField path="contact_details[].label" type="string" required>
+  The row label displayed in bold (e.g., `"Location"`).
+</ParamField>
+
+<ParamField path="contact_details[].value" type="string" required>
+  The value displayed next to the label (e.g., `"North Carolina, USA"`).
+</ParamField>
+
+---
+
+## ABOUT\_ME
+
+A list of strings, each rendered as a separate paragraph in the About section. You can use basic HTML tags inside the strings.
+
+```python
+ABOUT_ME = [
+    "Hello! I'm your name, and this is a brief intro paragraph.",
+    "A second paragraph describing your interests or background.",
+    "A closing sentence inviting visitors to explore your projects."
+]
+```
+
+<Note>
+  Each string becomes one `<p>` element. Keep paragraphs short — two to four sentences works well.
+</Note>
+
+---
+
+## EXPERIENCES
+
+A list of timeline entries displayed in the Experience section, ordered top to bottom.
+
+```python
+EXPERIENCES = [
+    {
+        "icon": "school-outline",
+        "title": "North Carolina State University",
+        "date": "Fall 2025 - Present",
+        "description": "B.S. in Computer Engineering."
+    },
+    {
+        "icon": "briefcase-outline",
+        "title": "Some Company",
+        "date": "Summer 2024",
+        "description": "Worked on embedded systems firmware."
+    }
+]
+```
+
+### Experience item fields
+
+<ParamField path="icon" type="string" required>
+  An Ionicons icon name representing the entry type. Common values: `"school-outline"`, `"briefcase-outline"`, `"code-slash-outline"`.
+</ParamField>
+
+<ParamField path="title" type="string" required>
+  Organization or role name shown as the entry heading.
+</ParamField>
+
+<ParamField path="date" type="string" required>
+  Date range displayed next to the title (e.g., `"Fall 2025 - Present"`, `"Summer 2024"`).
+</ParamField>
+
+<ParamField path="description" type="string" required>
+  A short description of the role or program. HTML is supported.
+</ParamField>
+
+### Adding a new experience entry
+
+Append a new dictionary to the `EXPERIENCES` list:
+
+```python
+{
+    "icon": "briefcase-outline",
+    "title": "Acme Corp",
+    "date": "Jan 2025 - May 2025",
+    "description": "Built internal tooling in Python and deployed via Docker."
+}
+```
+
+---
+
+## SKILLS
+
+A dictionary where each key is a category name and each value is a list of skill objects. Categories are rendered as separate sections with labeled progress bars.
+
+```python
+SKILLS = {
+    "Programming Languages": [
+        {
+            "name": "Python",
+            "level": "Expert",
+            "percentage": 100,
+            "details": "Used extensively across research, tooling, and personal projects.",
+            "projects": ["PyAerial", "airstrik.py"]
+        }
+    ],
+    "Technologies & Frameworks": [
+        {
+            "name": "Docker",
+            "level": "Expert",
+            "percentage": 100,
+            "details": "All major projects containerized for reproducible deployments.",
+            "projects": ["PyAerial", "airstrik.py", "DroneTracker"]
+        }
+    ]
+}
+```
+
+### Skill object fields
+
+<ParamField path="name" type="string" required>
+  Display name of the skill (e.g., `"Python"`, `"Docker"`).
+</ParamField>
+
+<ParamField path="level" type="string" required>
+  Proficiency label shown next to the bar. The source data uses `"Expert"`, `"Advanced"`, and `"Competent"`, but this is a free-form string — use any label that fits your scale.
+</ParamField>
+
+<ParamField path="percentage" type="number" required>
+  Fill level of the progress bar, from `0` to `100`.
+</ParamField>
+
+<ParamField path="details" type="string" required>
+  A sentence or two about how you use this skill. Shown in the expandable section below the bar.
+</ParamField>
+
+<ParamField path="projects" type="string[]" required>
+  List of project names that use this skill. Shown as tags in the expandable section.
+</ParamField>
+
+### Adding a new skill
+
+Append a skill object to the appropriate category list — or create a new category key:
+
+```python
+SKILLS["Technologies & Frameworks"].append({
+    "name": "Kubernetes",
+    "level": "Intermediate",
+    "percentage": 65,
+    "details": "Deployed multi-service applications using Helm charts.",
+    "projects": ["MyProject"]
+})
+```
+
+---
+
+## PROJECTS
+
+A list of project dictionaries. Each entry renders as a card in the Projects section. Cards are filterable by `category`.
+
+```python
+PROJECTS = [
+    {
+        "category": "internship",
+        "image": "https://placehold.co/400x250/3498DB/FFFFFF?text=PyAerial",
+        "title": "PyAerial",
+        "description": "A better plane tracker for AERPAW, successor to airstrik.py.",
+        "details": "PyAerial is a comprehensive ADS-B tracking solution...",
+        "features": [
+            "Real-time ADS-B decoding",
+            "MongoDB integration",
+            "Docker deployment",
+            "RESTful API"
+        ],
+        "link": "https://github.com/quantumbagel/PyAerial",
+        "skills": ["Python", "MavSDK", "Docker", "MongoDB", "ADS-B"]
+    }
+]
+```
+
+### Project item fields
+
+<ParamField path="category" type="string" required>
+  Controls which filter tab the card appears under. Valid values:
+  - `"internship"` — work done as part of a job or research role
+  - `"discord-bots"` — Discord bot projects
+  - `"other"` — personal or miscellaneous projects
+</ParamField>
+
+<ParamField path="image" type="string" required>
+  URL or path to the card thumbnail image (400×250 px recommended). You can use `https://placehold.co` for a quick placeholder.
+</ParamField>
+
+<ParamField path="hover_image" type="string">
+  Optional alternate image shown on card hover. Falls back to `image` if not provided.
+</ParamField>
+
+<ParamField path="title" type="string" required>
+  Project name displayed on the card.
+</ParamField>
+
+<ParamField path="description" type="string" required>
+  One-sentence summary shown on the card front.
+</ParamField>
+
+<ParamField path="details" type="string" required>
+  Longer description shown in the project modal when a card is clicked. HTML is supported.
+</ParamField>
+
+<ParamField path="features" type="string[]" required>
+  Bullet-point list of key features shown in the modal.
+</ParamField>
+
+<ParamField path="link" type="string | null">
+  URL to the project — typically a GitHub repo. Set to `None` to hide the link button on the card and in the modal.
+</ParamField>
+
+<ParamField path="skills" type="string[]" required>
+  Technology tags displayed on the card (e.g., `["Python", "Docker"]`).
+</ParamField>
+
+### Adding a new project
+
+Append a complete project dictionary to `PROJECTS`:
+
+```python
+{
+    "category": "other",
+    "image": "https://placehold.co/400x250/27AE60/FFFFFF?text=MyProject",
+    "title": "MyProject",
+    "description": "A CLI tool that automates repetitive file organization tasks.",
+    "details": "MyProject watches a target directory and sorts incoming files into "
+               "subfolders based on configurable rules. Runs as a background daemon.",
+    "features": [
+        "Rule-based file sorting",
+        "Daemon mode with systemd support",
+        "JSON configuration"
+    ],
+    "link": "https://github.com/your-username/myproject",
+    "skills": ["Python", "Linux", "systemd"]
+}
+```
+
+Then rebuild:
+
+```bash
+python generator.py
+```

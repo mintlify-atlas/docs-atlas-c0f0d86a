@@ -1,0 +1,124 @@
+---
+title: "Deployment"
+description: "Build the minified site and publish it to GitHub Pages."
+---
+
+The portfolio uses a simple static deployment model: `generator.py` writes a single minified `index.html`, and GitHub Pages serves that file directly from the repository root.
+
+## How the build works
+
+Running `python generator.py` does the following:
+
+1. Reads all data structures (`PERSONAL_INFO`, `ABOUT_ME`, `EXPERIENCES`, `SKILLS`, `PROJECTS`) from the top of the file.
+2. Calls `create_html_structure()`, which assembles the full HTML document by calling individual component functions (`generate_timeline_item`, `generate_skill_bar`, `generate_project_card`, etc.).
+3. Passes the assembled HTML through `htmlmin` to strip whitespace and comments.
+4. Writes the result to `index.html` in the repository root.
+5. Calls `generate_redirect_page()` and writes `resume/index.html` — a minimal redirect page that forwards visitors to the resume URL set in `PERSONAL_INFO["social_links"]["resume"]`.
+
+The output is a single self-contained file. All other assets — `tailwind.js`, `font.css`, and `pfp.webp` — are referenced as separate files and must live alongside `index.html`.
+
+## Static assets
+
+The following files must be committed to the repository root alongside `index.html`:
+
+| File | Purpose |
+| --- | --- |
+| `index.html` | Generated portfolio (main output) |
+| `resume/index.html` | Generated resume redirect page |
+| `tailwind.js` | Tailwind CSS standalone runtime |
+| `font.css` | Inter font stylesheet |
+| `pfp.webp` | Profile picture |
+
+<Warning>
+  Do not delete or rename these files. `index.html` references them by relative path, and removing any one of them will break the live site.
+</Warning>
+
+## Enabling GitHub Pages
+
+<Steps>
+  <Step title="Push your repository to GitHub">
+    If you have not already done so, make sure your fork is on GitHub and contains at least one commit with `index.html` at the root.
+  </Step>
+
+  <Step title="Open the Pages settings">
+    In your GitHub repository, go to **Settings** → **Pages**.
+  </Step>
+
+  <Step title="Configure the source">
+    Under **Build and deployment**, set:
+    - **Source**: Deploy from a branch
+    - **Branch**: `main` (or `master`)
+    - **Folder**: `/ (root)`
+
+    Click **Save**.
+  </Step>
+
+  <Step title="Wait for deployment">
+    GitHub will build and publish the site. After a minute or two, a banner at the top of the Pages settings page will show your live URL:
+
+    ```
+    https://<your-username>.github.io
+    ```
+  </Step>
+</Steps>
+
+## Deployment workflow
+
+Every time you update content, follow this sequence:
+
+<Steps>
+  <Step title="Edit generator.py">
+    Update any data structure — add a project, adjust a skill level, rewrite an About paragraph.
+  </Step>
+
+  <Step title="Rebuild index.html">
+    ```bash
+    python generator.py
+    ```
+  </Step>
+
+  <Step title="Commit all changed files">
+    Always commit `index.html` together with any asset changes (e.g., a new `pfp.webp`). Committing only the generator without rebuilding will leave the live site out of date.
+
+    ```bash
+    git add index.html resume/index.html generator.py pfp.webp
+    git commit -m "Update portfolio content"
+    ```
+  </Step>
+
+  <Step title="Push to GitHub">
+    ```bash
+    git push origin main
+    ```
+
+    GitHub Pages detects the push and redeploys automatically within a minute or two.
+  </Step>
+</Steps>
+
+<Note>
+  There is no CI/CD pipeline in this project. The `index.html` you commit is served exactly as-is — make sure to run the generator locally before every push.
+</Note>
+
+## Resume redirect
+
+The generator automatically creates a second output: `resume/index.html`. This is a minimal HTML redirect page that immediately forwards visitors to the resume URL defined in `PERSONAL_INFO["social_links"]["resume"]`.
+
+This means `https://<your-username>.github.io/resume` works as a shareable short link to your resume (Google Doc, PDF, or any URL) as long as you commit the `resume/` directory.
+
+The redirect page includes Open Graph and Twitter social preview metadata using the same title and profile image as the main portfolio.
+
+<Note>
+  Commit the generated `resume/index.html` alongside the main `index.html`. If you don't, the `/resume` path will 404 on GitHub Pages.
+</Note>
+
+## Custom domain
+
+GitHub Pages supports custom domains through a standard configuration process:
+
+1. Add a `CNAME` file to the repository root containing your domain (e.g., `yourname.dev`).
+2. Point your domain's DNS to GitHub's servers following [GitHub's custom domain guide](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site).
+3. Enable **Enforce HTTPS** in **Settings** → **Pages** once the DNS has propagated.
+
+<Tip>
+  Using a custom domain does not require any changes to `generator.py` or `index.html`. All asset paths are relative, so the site works under any hostname.
+</Tip>

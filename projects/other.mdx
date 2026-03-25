@@ -1,0 +1,148 @@
+---
+title: "Other projects"
+description: "Personal projects spanning web scraping, game AI, Minecraft plugins, portfolio websites, and browser automation."
+---
+
+A collection of projects that don't fit neatly into the AERPAW or Discord bot categories — ranging from a competitive chess AI built under a strict size budget to a Selenium bot that plays word games.
+
+## Projects
+
+<CardGroup cols={2}>
+  <Card title="finiteCraft" icon="flask" href="https://github.com/finiteCraft/finiteCraft">
+    A web scraper and recipe pathfinder for Neal Agarwal's Infinite Craft.
+  </Card>
+  <Card title="Portfolio Website (v1)" icon="globe" href="https://github.com/quantumbagel/quantumbagel.github.io/tree/d76d5fac008ab10e3a32b2550b36a8dd0a06b835">
+    A customized vCard portfolio template — the first version of this site.
+  </Card>
+  <Card title="Portfolio Website (v2)" icon="layout-dashboard" href="https://github.com/quantumbagel/quantumbagel.github.io">
+    The current portfolio, built from scratch in three days with TailwindCSS.
+  </Card>
+  <Card title="Statify" icon="bar-chart-2" href="https://github.com/quantumbagel/Statify">
+    A SpigotMC plugin for Minecraft player statistics and customizable leaderboards.
+  </Card>
+  <Card title="Molotov" icon="bomb" href="https://github.com/quantumbagel/Molotov">
+    A Selenium bot for the word game Bomb Party (jklm.fun).
+  </Card>
+  <Card title="Chess-Challenge" icon="brain" href="https://github.com/quantumbagel/Chess-Challenge">
+    A minimax chess AI for Sebastian Lague's Tiny Chess Bot Challenge.
+  </Card>
+</CardGroup>
+
+---
+
+## finiteCraft
+
+finiteCraft automates the discovery of all possible crafting combinations in Neal Agarwal's browser game Infinite Craft. It uses a distributed proxy network to avoid rate limiting and implements pathfinding algorithms to efficiently find crafting recipes for any target item.
+
+**Tech stack:** Python, Selenium, Web Scraping, Proxies, Automation
+
+<AccordionGroup>
+  <Accordion title="Features">
+    - Selenium-based browser automation for game interaction
+    - Proxy rotation support for distributed scraping
+    - Crafting recipe database for discovered combinations
+    - Pathfinding algorithms to find optimal crafting paths to a target
+  </Accordion>
+</AccordionGroup>
+
+[View on GitHub](https://github.com/finiteCraft/finiteCraft)
+
+---
+
+## Portfolio Website (v1)
+
+The first version of this portfolio, built by heavily customizing the open-source vCard template. It introduced personal styling changes and Ion-Icons integration before being superseded by a ground-up rebuild.
+
+**Tech stack:** Python, HTML, CSS, JS, Ion-Icons
+
+<AccordionGroup>
+  <Accordion title="Features">
+    - Responsive design inherited and extended from the vCard template
+    - Custom styling layered on top of the base template
+    - Ion-Icons integration for visual icons
+  </Accordion>
+</AccordionGroup>
+
+[View source snapshot on GitHub](https://github.com/quantumbagel/quantumbagel.github.io/tree/d76d5fac008ab10e3a32b2550b36a8dd0a06b835)
+
+---
+
+## Portfolio Website (v2)
+
+The current portfolio, built from scratch in three days. It replaced the vCard base entirely with a Python generator script and TailwindCSS, gaining dark mode, a project filtering system, and a clean responsive layout. This documentation site covers its inner workings.
+
+**Tech stack:** Python, HTML, CSS, JS, TailwindCSS, Ion-Icons
+
+<Tip>
+  Want to use this portfolio for yourself? See the [generator quickstart](/generator/quickstart) to fork and customize it.
+</Tip>
+
+<AccordionGroup>
+  <Accordion title="Features">
+    - TailwindCSS styling with no external CSS framework dependencies
+    - Dark mode support with automatic OS preference detection
+    - Smooth scrolling navigation
+    - Project filtering system by category
+  </Accordion>
+</AccordionGroup>
+
+[View on GitHub](https://github.com/quantumbagel/quantumbagel.github.io)
+
+---
+
+## Statify
+
+Statify is a SpigotMC plugin for Minecraft servers that tracks detailed player statistics and generates customizable leaderboards. It targets competitive server environments where per-player stat visibility drives engagement.
+
+**Tech stack:** Java, SpigotMC
+
+<AccordionGroup>
+  <Accordion title="Features">
+    - Comprehensive stat tracking across configurable categories
+    - Customizable leaderboard displays
+    - SpigotMC API integration for native Minecraft server support
+  </Accordion>
+</AccordionGroup>
+
+[View on GitHub](https://github.com/quantumbagel/Statify)
+
+---
+
+## Molotov
+
+Molotov is an automation bot for the browser-based word game Bomb Party on jklm.fun. It uses Selenium to interact with the game interface and an optimized word database for fast, accurate responses. JavaScript injection is used where direct DOM interaction is faster than simulated keystrokes.
+
+**Tech stack:** Python, Selenium, JavaScript
+
+<AccordionGroup>
+  <Accordion title="Features">
+    - Selenium-based browser automation for game interaction
+    - Optimized word database for rapid lookup under time pressure
+    - Configurable response timing to adjust bot behavior
+    - JavaScript injection for performance-critical interactions
+  </Accordion>
+</AccordionGroup>
+
+[View on GitHub](https://github.com/quantumbagel/Molotov)
+
+---
+
+## Chess-Challenge
+
+Chess-Challenge is an entry for Sebastian Lague's Tiny Chess Bot Challenge, where the goal is to write the strongest possible chess AI within strict code size constraints. It implements minimax search with alpha-beta pruning and a hand-tuned evaluation function.
+
+**Tech stack:** C#, Chess, AI
+
+<AccordionGroup>
+  <Accordion title="Features">
+    - Minimax algorithm with alpha-beta pruning for move search
+    - Compact code optimized to fit within the challenge's size limit
+    - Custom board evaluation function tuned for competitive performance
+    - Strong performance relative to the tight code size constraints
+  </Accordion>
+  <Accordion title="Challenge context">
+    Sebastian Lague's Tiny Chess Bot Challenge restricts all entries to a fixed token budget. Every line of code counts, so the implementation favors algorithmic efficiency and hand-written evaluation heuristics over larger, table-driven approaches.
+  </Accordion>
+</AccordionGroup>
+
+[View on GitHub](https://github.com/quantumbagel/Chess-Challenge)

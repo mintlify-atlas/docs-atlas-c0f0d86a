@@ -1,0 +1,50 @@
+{
+  "projectType": "general",
+  "projectName": "Quantumbagel Portfolio",
+  "projectDescription": "Julian Reder's personal developer portfolio website — a Python-generated static site showcasing projects, skills, and experience as a Computer Engineering student at NCSU.",
+  "theme": "willow",
+  "primaryColor": "#cb4a65",
+  "lightColor": "#2e2966",
+  "darkColor": null,
+  "navigation": {
+    "groups": [
+      {
+        "group": "Overview",
+        "pages": ["introduction", "about"]
+      },
+      {
+        "group": "Portfolio",
+        "pages": ["projects/overview", "projects/aerpaw", "projects/discord-bots", "projects/other"]
+      },
+      {
+        "group": "Background",
+        "pages": ["skills", "experience"]
+      },
+      {
+        "group": "Using the Generator",
+        "pages": ["generator/quickstart", "generator/customization", "generator/deployment"]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Python-driven static site generator — all portfolio data defined in a single generator.py file",
+    "Dark mode support with automatic user preference detection",
+    "Interactive project cards with modal detail view and category filtering",
+    "Expandable skill bars with proficiency levels and related projects",
+    "Timeline-based experience and education section",
+    "Responsive layout with fixed sidebar on desktop",
+    "TailwindCSS styling with Inter font and Ionicons iconography",
+    "GitHub Pages deployment via htmlmin-minified output"
+  ],
+  "publicApiSurface": [
+    "PERSONAL_INFO — dict defining name, title, profile image, social links, contact details",
+    "ABOUT_ME — list of HTML paragraph strings for the about section",
+    "EXPERIENCES — list of timeline entries with icon, title, date, description",
+    "SKILLS — dict of skill categories, each a list of skill objects with name, level, percentage, details, projects",
+    "PROJECTS — list of project dicts with category, image, title, description, details, features, link, skills",
+    "generate_timeline_item(item) — renders a single experience timeline entry as HTML",
+    "generate_skill_bar(skill) — renders a skill bar with expandable details as HTML",
+    "generate_project_card(project) — renders a project card with hover effects and modal data as HTML",
+    "create_html_structure() — assembles all components into the final HTML document"
+  ]
+}

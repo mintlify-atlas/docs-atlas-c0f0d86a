@@ -1,0 +1,110 @@
+---
+title: "Discord bots"
+description: "Discord bots for chess, paper-and-pencil games, server automation, and bot development templates."
+---
+
+These bots cover a range of use cases — competitive gaming, server administration, and starter tooling for other bot developers. All are built in Python, most using discord.py 2.0+.
+
+## Bots
+
+<CardGroup cols={2}>
+  <Card title="Piranha" icon="chess">
+    A chess-playing Discord bot with Stockfish AI integration and multi-difficulty support.
+  </Card>
+  <Card title="Triggered" icon="bolt" href="https://github.com/quantumbagel/Triggered">
+    An IFTTT-style automation bot for Discord server administrators.
+  </Card>
+  <Card title="PlayCord" icon="gamepad-2" href="https://github.com/PlayCord/bot">
+    Paper and pencil games in Discord with global and local leaderboards.
+  </Card>
+  <Card title="discord.py-template" icon="file-code" href="https://github.com/quantumbagel/discord.py-template">
+    A clean, modern discord.py 2.0+ starter template with slash command support.
+  </Card>
+</CardGroup>
+
+---
+
+## Piranha
+
+Piranha is a feature-rich Discord bot that lets users play chess directly within Discord. It integrates with the Stockfish chess engine to offer AI opponents at multiple difficulty levels and tracks game history and statistics per user.
+
+**Tech stack:** Python, Stockfish, Docker
+
+<Note>
+  Piranha does not have a public GitHub repository at this time.
+</Note>
+
+<AccordionGroup>
+  <Accordion title="Features">
+    - Play chess against an AI (Stockfish) or other server members
+    - Multiple difficulty levels via Stockfish engine depth configuration
+    - Game history and per-user statistics tracking
+    - Docker deployment support for self-hosting
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Triggered
+
+Triggered allows Discord server administrators to create custom automation rules based on triggers and resulting actions — similar to IFTTT but scoped entirely to Discord. Rules are stored in MySQL for persistence across restarts.
+
+**Tech stack:** Python, discord.py, MySQL, Programmable API
+
+<AccordionGroup>
+  <Accordion title="Features">
+    - Custom trigger/action rule system
+    - Programmable API for extending bot behavior
+    - MySQL database for persistent rule storage
+    - Extensive customization options for server administrators
+  </Accordion>
+  <Accordion title="Use cases">
+    Triggered is useful for servers that want automated responses to events — for example, assigning a role when a user reacts to a specific message, or posting a message when a new member joins a particular channel.
+  </Accordion>
+</AccordionGroup>
+
+[View on GitHub](https://github.com/quantumbagel/Triggered)
+
+---
+
+## PlayCord
+
+PlayCord brings classic paper and pencil games into Discord with a competitive layer. It features both global (cross-server) and local (per-server) leaderboards, and uses a dynamic game loading system so new games can be added without modifying core bot logic.
+
+**Tech stack:** Python, discord.py, MySQL, Programmable API
+
+<AccordionGroup>
+  <Accordion title="Features">
+    - Multiple paper and pencil game modes
+    - Global and server-local leaderboards
+    - Dynamic game loading system for easy extensibility
+    - MySQL persistence for scores and leaderboard data
+  </Accordion>
+  <Accordion title="Architecture note">
+    The dynamic loading system means each game is a self-contained module. Adding a new game requires only dropping a new file into the games directory — the bot discovers and registers it automatically at startup.
+  </Accordion>
+</AccordionGroup>
+
+[View on GitHub](https://github.com/PlayCord/bot)
+
+---
+
+## discord.py-template
+
+A well-structured starting point for building Discord bots with discord.py 2.0+. Designed to be easy to read and extend for developers of any experience level, with modern slash command support and a clean project layout.
+
+**Tech stack:** Python, discord.py
+
+<AccordionGroup>
+  <Accordion title="Features">
+    - Clean, opinionated project structure
+    - Modern discord.py 2.0+ syntax throughout
+    - Slash command support out of the box
+    - Easy to customize and extend for any bot use case
+  </Accordion>
+  <Accordion title="Who it's for">
+    Developers starting a new Discord bot often spend significant time setting up boilerplate. This template removes that friction, letting you focus on bot logic from the first line of real code.
+  </Accordion>
+</AccordionGroup>
+
+[View on GitHub](https://github.com/quantumbagel/discord.py-template)

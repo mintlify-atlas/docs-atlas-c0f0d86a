@@ -1,0 +1,112 @@
+---
+title: "Quickstart"
+description: "Fork this portfolio template and have your own site running in minutes."
+---
+
+This guide walks you through forking the portfolio, personalizing the content, and previewing the result locally.
+
+## Prerequisites
+
+Before you begin, make sure you have the following installed:
+
+- **Python 3.8+** — the generator script requires Python 3
+- **pip** — comes bundled with Python 3
+- **Git** — to clone your fork
+- A **GitHub account** — needed to host the site on GitHub Pages
+
+## Setup
+
+<Steps>
+  <Step title="Fork the repository">
+    Go to [quantumbagel/quantumbagel.github.io](https://github.com/quantumbagel/quantumbagel.github.io) on GitHub and click **Fork**.
+
+    <Note>
+      Rename the fork to `<your-username>.github.io` so GitHub Pages serves it at your root domain automatically.
+    </Note>
+  </Step>
+
+  <Step title="Clone your fork">
+    ```bash
+    git clone https://github.com/<your-username>/<your-username>.github.io.git
+    cd <your-username>.github.io
+    ```
+  </Step>
+
+  <Step title="Install the htmlmin dependency">
+    The generator uses `htmlmin` to minify the output HTML before writing `index.html`.
+
+    ```bash
+    pip install htmlmin
+    ```
+  </Step>
+
+  <Step title="Replace the profile picture">
+    Swap out `pfp.webp` in the repository root with your own photo. The file **must** be named `pfp.webp` and be in WebP format.
+
+    ```bash
+    # Example: convert a JPEG using ImageMagick
+    convert your-photo.jpg pfp.webp
+    ```
+
+    <Tip>
+      Keep the image roughly square and at least 400×400 px for best results.
+    </Tip>
+  </Step>
+
+  <Step title="Edit your personal information">
+    Open `generator.py` and update the `PERSONAL_INFO` dictionary near the top of the file:
+
+    ```python
+    PERSONAL_INFO = {
+        "name": "Your Name",
+        "title": "Your Title @ Your Organization",
+        "profile_image": "pfp.webp",
+        "social_links": {
+            "github": "https://github.com/your-username",
+            "linkedin": "https://www.linkedin.com/in/your-profile/",
+            "discord": "https://discordapp.com/users/your-user-id",
+            "resume": "https://link-to-your-resume"
+        },
+        # ...
+    }
+    ```
+
+    See [Customization](/generator/customization) for a full breakdown of every field you can change.
+  </Step>
+
+  <Step title="Run the generator">
+    From the repository root, run:
+
+    ```bash
+    python generator.py
+    ```
+
+    This calls `create_html_structure()`, assembles all the HTML sections, minifies the output with `htmlmin`, and writes the result to `index.html`.
+  </Step>
+
+  <Step title="Preview the result">
+    Open `index.html` directly in your browser to verify everything looks correct before deploying.
+
+    ```bash
+    # macOS
+    open index.html
+
+    # Linux
+    xdg-open index.html
+
+    # Windows
+    start index.html
+    ```
+  </Step>
+</Steps>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Customization" icon="sliders" href="/generator/customization">
+    Learn how to edit every section — projects, skills, experience, and more.
+  </Card>
+  <Card title="Deployment" icon="rocket" href="/generator/deployment">
+    Publish your site to GitHub Pages in a few commands.
+  </Card>
+</CardGroup>

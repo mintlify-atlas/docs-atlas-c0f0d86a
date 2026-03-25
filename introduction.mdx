@@ -1,0 +1,73 @@
+---
+title: "Quantumbagel Portfolio"
+description: "Documentation for Julian Reder's developer portfolio — a Python-generated static site showcasing projects, skills, and experience."
+---
+
+<img
+  src="https://media.brand.dev/73bb5ac4-03b2-4783-8450-eebbe9486f2a.png"
+  alt="Quantumbagel Logo"
+  width="80"
+  style={{ marginBottom: "1.5rem" }}
+/>
+
+# Welcome to quantumbagel.github.io
+
+This is the documentation site for Julian Reder's personal developer portfolio, hosted at [quantumbagel.github.io](https://quantumbagel.github.io). The portfolio is version 2, rebuilt from the ground up with TailwindCSS and driven by a Python generator script.
+
+<Info>
+  The entire portfolio's content — projects, skills, experience — lives in a single Python file (`generator.py`). Updating the site is as simple as editing that file and running `python generator.py`.
+</Info>
+
+## What's here
+
+<CardGroup cols={2}>
+  <Card title="About Julian" icon="user" href="/about">
+    Background, contact info, and what this portfolio is all about.
+  </Card>
+  <Card title="Projects" icon="folder-open" href="/projects/overview">
+    A full breakdown of AERPAW research work, Discord bots, and personal projects.
+  </Card>
+  <Card title="Skills & Experience" icon="chart-bar" href="/skills">
+    Programming languages, tools, and professional timeline.
+  </Card>
+  <Card title="Use the Generator" icon="code" href="/generator/quickstart">
+    Fork and customize this portfolio for yourself — get running in minutes.
+  </Card>
+</CardGroup>
+
+## Key features
+
+- **Python-powered generator** — all data lives in `generator.py`; the HTML is built on demand
+- **Dark mode** — automatic detection of user OS preference, fully styled for both modes
+- **Interactive project cards** — modal detail view with feature lists, skill tags, and GitHub links
+- **Category filtering** — filter projects by type: Discord Bots, Internship, or Other
+- **Expandable skill bars** — click any skill to reveal details and related projects
+- **Responsive layout** — fixed sidebar on desktop, stacked on mobile
+- **GitHub Pages deployment** — minified HTML output via `htmlmin`; commit and push to deploy
+
+## Tech stack
+
+| Layer | Technology |
+|-------|------------|
+| Styling | TailwindCSS (standalone JS build) |
+| Icons | Ionicons 7.1 |
+| Font | Inter |
+| Generator | Python 3 + htmlmin |
+| Hosting | GitHub Pages |
+
+## Quick navigation
+
+<CardGroup cols={2}>
+  <Card title="Quickstart" icon="rocket" href="/generator/quickstart">
+    Get your own copy of this portfolio up and running.
+  </Card>
+  <Card title="Customization" icon="palette" href="/generator/customization">
+    Learn how to update content by editing the data structures in generator.py.
+  </Card>
+  <Card title="Deployment" icon="cloud" href="/generator/deployment">
+    Deploy to GitHub Pages with htmlmin output.
+  </Card>
+  <Card title="AERPAW Projects" icon="plane" href="/projects/aerpaw">
+    Drone tracking, ADS-B systems, and research software.
+  </Card>
+</CardGroup>

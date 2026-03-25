@@ -1,0 +1,114 @@
+---
+title: "AERPAW projects"
+description: "Research software built at NC State's AERPAW testbed — drone tracking, ADS-B decoding, and MAVLink abstraction."
+---
+
+<Info>
+  These projects were developed during an internship with Dr. Mihail Sichitiu at NC State University under the **AERPAW** (Aerial Experimentation and Research Platform for Advanced Wireless) program. AERPAW is an NSF-funded platform for advanced wireless and drone research.
+</Info>
+
+All four projects target the same problem space: giving experimenters and the platform itself reliable, high-level tools for drone command, airspace awareness, and camera-based tracking.
+
+## Projects
+
+<CardGroup cols={2}>
+  <Card title="PyAerial" icon="satellite-dish" href="https://github.com/quantumbagel/PyAerial">
+    A comprehensive ADS-B tracking solution and successor to airstrik.py, with persistent storage and a REST API.
+  </Card>
+  <Card title="airstrik.py" icon="plane" href="https://github.com/quantumbagel/airstrik.py">
+    The original pure-Python ADS-B tracker that laid the groundwork for PyAerial.
+  </Card>
+  <Card title="DroneTracker" icon="video" href="https://github.com/quantumbagel/DroneTracker">
+    A computer vision system that uses PTZ cameras to track drones in real-time via VAPIX.
+  </Card>
+  <Card title="aerpawlib" icon="code" href="https://github.com/aerpaw/aerpawlib">
+    A high-level MAVLink/MAVSDK abstraction layer that simplifies experiment development on the AERPAW platform.
+  </Card>
+</CardGroup>
+
+---
+
+## PyAerial
+
+PyAerial is the primary ADS-B tracking solution for the AERPAW research platform. It decodes ADS-B signals from aircraft transponders in real-time, stores positional history in MongoDB, and exposes a RESTful API for downstream consumers.
+
+**Tech stack:** Python, MavSDK, Docker, MongoDB, ADS-B
+
+<AccordionGroup>
+  <Accordion title="Features">
+    - Real-time ADS-B decoding from aircraft transponders
+    - MongoDB integration for persistent positional history
+    - Docker containerized deployment for reproducible environments
+    - RESTful API for querying current and historical aircraft data
+  </Accordion>
+  <Accordion title="Background">
+    PyAerial was built as a complete rewrite of airstrik.py, addressing its limitations around data persistence and API access. The containerized deployment model means it can be dropped into the AERPAW infrastructure without dependency conflicts.
+  </Accordion>
+</AccordionGroup>
+
+[View on GitHub](https://github.com/quantumbagel/PyAerial)
+
+---
+
+## airstrik.py
+
+airstrik.py is the original pure-Python implementation of an ADS-B tracker for AERPAW drone airspace monitoring. It served as the proof-of-concept that demonstrated the feasibility of using off-the-shelf ADS-B receivers for drone airspace awareness.
+
+**Tech stack:** Python, MavSDK, Docker, MongoDB, ADS-B
+
+<AccordionGroup>
+  <Accordion title="Features">
+    - Pure Python implementation with no compiled dependencies
+    - ADS-B signal processing for aircraft position decoding
+    - Integration with MavSDK for drone communication
+  </Accordion>
+  <Accordion title="Background">
+    This project directly informed the design of PyAerial. Its simplicity made it easy to iterate on ideas quickly, and its limitations — no persistent storage, no API — shaped the requirements for the successor.
+  </Accordion>
+</AccordionGroup>
+
+[View on GitHub](https://github.com/quantumbagel/airstrik.py)
+
+---
+
+## DroneTracker
+
+DroneTracker is a computer vision system that controls PTZ (pan-tilt-zoom) cameras to follow drones in real-time. It communicates with AXIS cameras over the VAPIX protocol and uses MavSDK telemetry to predict drone position for proactive camera movement.
+
+**Tech stack:** Python, VAPIX, Docker, MavSDK, netcat, Linux
+
+<AccordionGroup>
+  <Accordion title="Features">
+    - PTZ camera control via the AXIS VAPIX protocol
+    - Real-time drone position estimation from camera feeds
+    - MavSDK integration for drone telemetry-assisted tracking
+    - Containerized deployment
+  </Accordion>
+  <Accordion title="Background">
+    Visual tracking adds a layer of physical observability to AERPAW experiments. DroneTracker allows researchers and platform operators to maintain a persistent visual lock on drones without manual camera control.
+  </Accordion>
+</AccordionGroup>
+
+[View on GitHub](https://github.com/quantumbagel/DroneTracker)
+
+---
+
+## aerpawlib
+
+aerpawlib provides a high-level Python interface for controlling drones on the AERPAW testbed. It abstracts away the low-level complexity of MAVLink and MAVSDK so that experimenters can focus on their research logic rather than protocol details.
+
+**Tech stack:** Python, MAVLink, MAVSDK, Drones
+
+<AccordionGroup>
+  <Accordion title="Features">
+    - High-level drone control API built on top of MAVSDK
+    - MAVLink/MAVSDK abstraction for cleaner experiment code
+    - Simplified experiment development workflow
+    - Full integration with the AERPAW platform environment
+  </Accordion>
+  <Accordion title="Background">
+    Writing drone experiments directly against MAVSDK requires understanding a large surface area of protocol-level details. aerpawlib reduces that surface area to a small set of intuitive commands, lowering the barrier to entry for AERPAW researchers.
+  </Accordion>
+</AccordionGroup>
+
+[View on GitHub](https://github.com/aerpaw/aerpawlib)
